@@ -62,6 +62,9 @@ public class JsonGraph : IJsonGraph
     /// </example>
     public void Build(JsonNode root, string pathNodes, string fieldId, string pathDeps)
     {
+        Nodes.Clear();
+        Edges.Clear();
+
         var nodesArray = JsonCore.JsonPath(root, pathNodes) as JsonArray;
         if (nodesArray is null) return;
 
@@ -69,7 +72,7 @@ public class JsonGraph : IJsonGraph
         {
             if (item is null)
                 continue;
-            string? id = JsonCore.Get(item, fieldId)?.ToString();
+            string? id = JsonCore.GetString(item, fieldId);
             if (string.IsNullOrEmpty(id))
                 continue;
 
@@ -83,8 +86,8 @@ public class JsonGraph : IJsonGraph
             {
                 if (d is null)
                     continue;
-                string depId = d.ToString();
-                Edges[id].Add(depId);
+                string depId = d is JsonValue value && value.TryGetValue<string>(out string? stringValue) ? stringValue : d.ToString().Trim('"');
+                if (!string.IsNullOrEmpty(depId)) Edges[id].Add(depId);
             }
         }
     }
@@ -141,6 +144,7 @@ public class JsonGraph : IJsonGraph
     {
         var visited = new HashSet<string>();
         var result = new List<string>();
+        if (!Nodes.ContainsKey(startId)) return result;
         DfsVisit(startId, visited, result);
 
         return result;
@@ -219,6 +223,9 @@ public class JsonGraph : IJsonGraph
     /// </example>
     public Dictionary<string, double> PageRank(int iterations = 20, double damping = 0.85)
     {
+        if (iterations < 0) throw new ArgumentOutOfRangeException(nameof(iterations));
+        if (damping < 0 || damping > 1) throw new ArgumentOutOfRangeException(nameof(damping));
+        if (Nodes.Count == 0) return new Dictionary<string, double>();
         Dictionary<string, double> rank = Nodes.Keys.ToDictionary(k => k, _ => 1.0 / Nodes.Count);
         Dictionary<string, double> newRank = Nodes.Keys.ToDictionary(k => k, _ => 0.0);
 
@@ -226,15 +233,17 @@ public class JsonGraph : IJsonGraph
         {
             foreach (string k in Nodes.Keys)
                 newRank[k] = (1 - damping) / Nodes.Count;
+            double danglingRank = 0;
             foreach ((string id, List<string> children) in Edges)
             {
-                if (children.Count == 0)
-                    continue;
+                if (children.Count == 0) { danglingRank += rank[id]; continue; }
                 double share = rank[id] / children.Count;
-                foreach (string c in children.Where(c => newRank.ContainsKey(c)))
-                {
-                    newRank[c] += damping * share;
-                }
+                foreach (string c in children.Where(c => newRank.ContainsKey(c))) newRank[c] += damping * share;
+            }
+            if (danglingRank > 0)
+            {
+                double share = damping * danglingRank / Nodes.Count;
+                foreach (string k in Nodes.Keys) newRank[k] += share;
             }
             foreach (string k in Nodes.Keys)
                 rank[k] = newRank[k];

@@ -42,7 +42,7 @@ public class JsonAiEngineIntegrationFuzzingTests
         _sql = new JsonSqlEngine();
     }
 
-    [Fact]
+    [Test]
     public void AIQuery_Fuzzing_ShouldNotThrowExceptions()
     {
         const string baseQuery = """
@@ -67,7 +67,7 @@ public class JsonAiEngineIntegrationFuzzingTests
             Assert.Null(ex); // El parser NO debe romperse nunca
         }
     }
-    [Fact]
+    [Test]
     public void FullQuery_Fuzzing_ShouldNotThrowExceptions()
     {
         const string baseQuery = """
@@ -93,7 +93,7 @@ public class JsonAiEngineIntegrationFuzzingTests
             Assert.Null(ex);
         }
     }
-    [Fact]
+    [Test]
     public void GraphExpand_Fuzzing_ShouldNotThrowExceptions()
     {
         string baseQuery = """
@@ -117,7 +117,7 @@ public class JsonAiEngineIntegrationFuzzingTests
             Assert.Null(ex); // El parser y GRAPH EXPAND no deben romperse nunca
         }
     }
-    [Fact]
+    [Test]
     public void JsonPath_Fuzzing_ShouldNotThrowExceptions()
     {
         const string baseQuery = """
@@ -140,7 +140,7 @@ public class JsonAiEngineIntegrationFuzzingTests
             Assert.Null(ex);
         }
     }
-    [Fact]
+    [Test]
     public void Limit_Fuzzing_ShouldNotThrowExceptions()
     {
         const string baseQuery = """
@@ -164,7 +164,7 @@ public class JsonAiEngineIntegrationFuzzingTests
             Assert.Null(ex);
         }
     }
-    [Fact]
+    [Test]
     public void NaturalLanguage_Fuzzing_ShouldNotThrowExceptions()
     {
         const string baseNl = "Muéstrame los items caros ordenados por importancia";
@@ -185,7 +185,7 @@ public class JsonAiEngineIntegrationFuzzingTests
             Assert.Null(ex);
         }
     }
-    [Fact]
+    [Test]
     public void OrderBy_Fuzzing_ShouldNotThrowExceptions()
     {
         string baseQuery = """
@@ -209,7 +209,7 @@ public class JsonAiEngineIntegrationFuzzingTests
             Assert.Null(ex);
         }
     }
-    [Fact]
+    [Test]
     public void PageRank_Fuzzing_ShouldNotThrowExceptions()
     {
         const string baseQuery = """
@@ -233,7 +233,7 @@ public class JsonAiEngineIntegrationFuzzingTests
             Assert.Null(ex);
         }
     }
-    [Fact]
+    [Test]
     public void Return_Fuzzing_ShouldNotThrowExceptions()
     {
         const string baseQuery = """
@@ -256,7 +256,7 @@ public class JsonAiEngineIntegrationFuzzingTests
             Assert.Null(ex); // RETURN debe ser robusto
         }
     }
-    [Fact]
+    [Test]
     public void SqlEngine_Fuzzing_ShouldNotThrowExceptions()
     {
         const string baseSql = "SELECT * FROM $.items[*] WHERE precio.valor > 20";
@@ -275,7 +275,7 @@ public class JsonAiEngineIntegrationFuzzingTests
             Assert.Null(ex);
         }
     }
-    [Fact]
+    [Test]
     public void Where_Fuzzing_ShouldNotThrowExceptions()
     {
         const string baseQuery = """

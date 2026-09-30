@@ -29,7 +29,7 @@ public class JsonAiEngineTests
         _graph.Build(_root, "$.items", "id", "dependencias");
     }
 
-    [Fact]
+    [Test]
     public void Execute_ShouldReturnRankedItems()
     {
         const string nl = "Muéstrame los items caros y sus dependencias ordenadas por importancia";

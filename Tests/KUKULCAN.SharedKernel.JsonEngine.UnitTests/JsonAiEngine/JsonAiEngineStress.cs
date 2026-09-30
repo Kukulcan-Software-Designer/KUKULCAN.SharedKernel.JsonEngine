@@ -4,7 +4,7 @@ namespace KUKULCAN.SharedKernel.JsonEngine.UnitTests.JsonAiEngine;
 
 public class JsonAiEngineStress
 {
-    [Fact]
+    [Test]
     public void JsonAI_StressTest_10000Nodes_50000Edges()
     {
         const int nodeCount = 10000;

@@ -6,7 +6,7 @@ namespace KUKULCAN.SharedKernel.JsonEngine.UnitTests.JsonAiEngine;
 
 public class JsonAiQueryTests
 {
-    [Fact]
+    [Test]
     public void JsonAI_AIQueryParser_ShouldRemainStable()
     {
         JsonNode root = JsonNode.Parse("""

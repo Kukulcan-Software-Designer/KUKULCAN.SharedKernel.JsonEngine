@@ -4,7 +4,7 @@ namespace KUKULCAN.SharedKernel.JsonEngine.UnitTests.JsonAiEngine;
 
 public class JsonAiNlTests
 {
-    [Fact]
+    [Test]
     public void ToAiQuery_ShouldGeneratePipeline()
     {
         const string nl = "Muéstrame los items caros y sus dependencias ordenadas por importancia";

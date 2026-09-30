@@ -5,7 +5,7 @@ namespace KUKULCAN.SharedKernel.JsonEngine.UnitTests.JsonAiEngine;
 
 public class JsonAiEngineMoqTests
 {
-    [Fact]
+    [Test]
     public void Execute_ShouldUseMocksCorrectly()
     {
         // JSON raíz simulado

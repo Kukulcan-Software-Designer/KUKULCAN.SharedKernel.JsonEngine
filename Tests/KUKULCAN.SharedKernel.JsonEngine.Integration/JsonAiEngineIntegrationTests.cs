@@ -33,7 +33,7 @@ public class JsonAiEngineIntegrationTests
         _sql = new JsonSqlEngine();
     }
 
-    [Fact]
+    [Test]
     public void AIQueryParser_ShouldRemainStable()
     {
         JsonNode root = JsonNode.Parse("""
@@ -88,7 +88,7 @@ public class JsonAiEngineIntegrationTests
         Assert.Equal("A", results[0][0]);
         Assert.Equal("D", results[0][1]);
     }
-    [Fact]
+    [Test]
     public void Conditions_ShouldFilterCorrectly()
     {
         JsonNode root = JsonNode.Parse("""
@@ -122,7 +122,7 @@ public class JsonAiEngineIntegrationTests
         Assert.DoesNotContain("D", ids);
         Assert.DoesNotContain("B", ids);
     }
-    [Fact]
+    [Test]
     public void OrderByAndLimit_ShouldSortAndLimitCorrectly()
     {
         JsonNode root = JsonNode.Parse("""
@@ -156,7 +156,7 @@ public class JsonAiEngineIntegrationTests
         Assert.Equal("D", result[1]["id"]!.ToString().Trim('"'));
 
     }
-    [Fact]
+    [Test]
     public void ReturnAll_ShouldReturnRawJsonNodes()
     {
         JsonNode root = JsonNode.Parse("""
@@ -185,7 +185,7 @@ public class JsonAiEngineIntegrationTests
         Assert.Equal(root["items"]![0]!.ToString(), result[0]["*"]!.ToString());
         Assert.Equal(root["items"]![1]!.ToString(), result[1]["*"]!.ToString());
     }
-    [Fact]
+    [Test]
     public void StressTest_10000Nodes_50000Edges()
     {
         const int nodeCount = 10000;
@@ -233,7 +233,7 @@ public class JsonAiEngineIntegrationTests
         Assert.NotEmpty(result);
         Assert.True(sw.ElapsedMilliseconds < 2000, $"Tardó {sw.ElapsedMilliseconds} ms");
     }
-    [Fact]
+    [Test]
     public void JsonAI_EndToEnd_ShouldReturnRankedExpensiveItems()
     {
         // Lenguaje natural → AI QUERY
@@ -262,7 +262,7 @@ public class JsonAiEngineIntegrationTests
         Assert.True(indexA < indexC);
         Assert.True(indexD < indexC);
     }
-    [Fact]
+    [Test]
     public void JsonAI_Conditions_ShouldFilterCorrectly()
     {
         JsonNode root = JsonNode.Parse("""
@@ -296,7 +296,7 @@ public class JsonAiEngineIntegrationTests
         Assert.DoesNotContain("D", ids); // 80 excluido
         Assert.DoesNotContain("B", ids); // 5 excluido
     }
-    [Fact]
+    [Test]
     public void JsonAI_OrderByAndLimit_ShouldSortAndLimitCorrectly()
     {
         JsonNode root = JsonNode.Parse("""
@@ -329,7 +329,7 @@ public class JsonAiEngineIntegrationTests
         Assert.Equal("A", result[0]["id"]!.ToString().Trim('"')); // 120
         Assert.Equal("D", result[1]["id"]!.ToString().Trim('"')); // 80
     }
-    [Fact]
+    [Test]
     public void JsonAI_ReturnAll_ShouldReturnRawJsonNodes()
     {
         JsonNode root = JsonNode.Parse("""

@@ -7,7 +7,7 @@ namespace KUKULCAN.SharedKernel.JsonEngine.Integration;
 
 public class JsonGraphIntegrationTests
 {
-    [Fact]
+    [Test]
     public void JsonAI_GraphExpand_WithLevels_ShouldExpandCorrectly()
     {
         JsonNode root = JsonNode.Parse("""
@@ -42,7 +42,7 @@ public class JsonGraphIntegrationTests
         Assert.Contains("C", ids);
         Assert.Contains("D", ids); // B → D (2 niveles)
     }
-    [Fact]
+    [Test]
     public void GraphExpand_WithLevels_ShouldExpandCorrectly()
     {
         JsonNode root = JsonNode.Parse("""
