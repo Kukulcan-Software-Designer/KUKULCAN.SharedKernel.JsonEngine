@@ -38,12 +38,12 @@ public class JsonAiEngineTests
         var sqlEngine = new JsonSqlEngine();
         List<Dictionary<string, JsonNode?>> result = AI.JsonAiEngine.Execute(_root, _graph, aiQuery, sqlEngine);
 
-        Assert.NotEmpty(result);
+        Assert.That(result, Is.Not.Empty);
 
         // Debe contener A y D (caros)
         List<string> ids = result.Select(r => r["id"]!.ToString().Trim('"')).ToList();
 
-        Assert.Contains("A", ids);
-        Assert.Contains("D", ids);
+        Assert.That(ids, Does.Contain("A"));
+        Assert.That(ids, Does.Contain("D"));
     }
 }

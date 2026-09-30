@@ -74,7 +74,7 @@ public class JsonAiEngineStress
         // -----------------------------
         // Validaciones
         // -----------------------------
-        Assert.NotEmpty(result);
-        Assert.True(sw.ElapsedMilliseconds < 2000, $"El test tardó demasiado: {sw.ElapsedMilliseconds} ms");
+        Assert.That(result, Is.Not.Empty);
+        Assert.That(sw.ElapsedMilliseconds < 2000, $"El test tardó demasiado: {sw.ElapsedMilliseconds} ms", Is.True);
     }
 }

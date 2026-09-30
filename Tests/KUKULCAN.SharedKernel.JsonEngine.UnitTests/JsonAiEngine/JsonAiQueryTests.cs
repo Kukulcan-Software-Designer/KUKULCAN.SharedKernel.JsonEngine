@@ -64,11 +64,11 @@ public class JsonAiQueryTests
         // -----------------------------
         // Todas las variantes deben producir el mismo resultado
         // -----------------------------
-        Assert.Equal(results[0], results[1]);
-        Assert.Equal(results[1], results[2]);
+        Assert.That(results[1], Is.EqualTo(results[0]));
+        Assert.That(results[2], Is.EqualTo(results[1]));
 
         // Validación del contenido
-        Assert.Equal("A", results[0][0]); // 120
-        Assert.Equal("D", results[0][1]); // 80
+        Assert.That(results[0][0], Is.EqualTo("A")); // 120
+        Assert.That(results[0][1], Is.EqualTo("D")); // 80
     }
 }

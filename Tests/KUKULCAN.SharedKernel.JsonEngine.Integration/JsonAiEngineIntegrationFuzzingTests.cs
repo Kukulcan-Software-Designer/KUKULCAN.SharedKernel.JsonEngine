@@ -59,12 +59,12 @@ public class JsonAiEngineIntegrationFuzzingTests
         {
             string fuzzed = FuzzQuery(baseQuery, random);
 
-            Exception? ex = Record.Exception(() =>
+            Assert.DoesNotThrow(() =>
             {
                 List<Dictionary<string, JsonNode?>> result = JsonAiEngine.Execute(_root, _graph, fuzzed, _sql);
             });
 
-            Assert.Null(ex); // El parser NO debe romperse nunca
+            Assert.That(ex, Is.Null); // El parser NO debe romperse nunca
         }
     }
     [Test]
@@ -85,12 +85,12 @@ public class JsonAiEngineIntegrationFuzzingTests
         {
             string fuzzed = FuzzEverything(baseQuery, rnd);
 
-            Exception? ex = Record.Exception(() =>
+            Assert.DoesNotThrow(() =>
             {
                 JsonAiEngine.Execute(_root, _graphDependencies, fuzzed, _sql);
             });
 
-            Assert.Null(ex);
+            Assert.That(ex, Is.Null);
         }
     }
     [Test]
@@ -109,12 +109,12 @@ public class JsonAiEngineIntegrationFuzzingTests
         {
             string fuzzed = FuzzQuery(baseQuery, rnd);
 
-            Exception? ex = Record.Exception(() =>
+            Assert.DoesNotThrow(() =>
             {
                 List<Dictionary<string, JsonNode?>> result = JsonAiEngine.Execute(_root, _graph, fuzzed, _sql);
             });
 
-            Assert.Null(ex); // El parser y GRAPH EXPAND no deben romperse nunca
+            Assert.That(ex, Is.Null); // El parser y GRAPH EXPAND no deben romperse nunca
         }
     }
     [Test]
@@ -132,12 +132,12 @@ public class JsonAiEngineIntegrationFuzzingTests
         {
             string fuzzed = FuzzJsonPath(baseQuery, rnd);
 
-            Exception? ex = Record.Exception(() =>
+            Assert.DoesNotThrow(() =>
             {
                 JsonAiEngine.Execute(_root, _graph, fuzzed, _sql);
             });
 
-            Assert.Null(ex);
+            Assert.That(ex, Is.Null);
         }
     }
     [Test]
@@ -156,12 +156,12 @@ public class JsonAiEngineIntegrationFuzzingTests
         {
             string fuzzed = FuzzLimit(baseQuery, rnd);
 
-            Exception? ex = Record.Exception(() =>
+            Assert.DoesNotThrow(() =>
             {
                 JsonAiEngine.Execute(_root, _graph, fuzzed, _sql);
             });
 
-            Assert.Null(ex);
+            Assert.That(ex, Is.Null);
         }
     }
     [Test]
@@ -177,12 +177,12 @@ public class JsonAiEngineIntegrationFuzzingTests
 
             string aiQuery = JsonAiNl.ToAiQuery(fuzzedNl);
 
-            Exception? ex = Record.Exception(() =>
+            Assert.DoesNotThrow(() =>
             {
                 JsonAiEngine.Execute(_root, _graph, aiQuery, _sql);
             });
 
-            Assert.Null(ex);
+            Assert.That(ex, Is.Null);
         }
     }
     [Test]
@@ -201,12 +201,12 @@ public class JsonAiEngineIntegrationFuzzingTests
         {
             string fuzzed = FuzzOrderBy(baseQuery, rnd);
 
-            Exception? ex = Record.Exception(() =>
+            Assert.DoesNotThrow(() =>
             {
                 JsonAiEngine.Execute(_root, _graph, fuzzed, _sql);
             });
 
-            Assert.Null(ex);
+            Assert.That(ex, Is.Null);
         }
     }
     [Test]
@@ -225,12 +225,12 @@ public class JsonAiEngineIntegrationFuzzingTests
         {
             string fuzzed = FuzzPageRank(baseQuery, rnd);
 
-            Exception? ex = Record.Exception(() =>
+            Assert.DoesNotThrow(() =>
             {
                 JsonAiEngine.Execute(_root, _graph, fuzzed, _sql);
             });
 
-            Assert.Null(ex);
+            Assert.That(ex, Is.Null);
         }
     }
     [Test]
@@ -248,12 +248,12 @@ public class JsonAiEngineIntegrationFuzzingTests
         {
             string fuzzed = FuzzReturn(baseQuery, rnd);
 
-            Exception? ex = Record.Exception(() =>
+            Assert.DoesNotThrow(() =>
             {
                 List<Dictionary<string, JsonNode?>> result = JsonAiEngine.Execute(_root, _graph, fuzzed, _sql);
             });
 
-            Assert.Null(ex); // RETURN debe ser robusto
+            Assert.That(ex, Is.Null); // RETURN debe ser robusto
         }
     }
     [Test]
@@ -267,12 +267,12 @@ public class JsonAiEngineIntegrationFuzzingTests
         {
             string fuzzed = FuzzSql(baseSql, rnd);
 
-            Exception? ex = Record.Exception(() =>
+            Assert.DoesNotThrow(() =>
             {
                 _sql.Execute(_root, fuzzed);
             });
 
-            Assert.Null(ex);
+            Assert.That(ex, Is.Null);
         }
     }
     [Test]
@@ -290,12 +290,12 @@ public class JsonAiEngineIntegrationFuzzingTests
         {
             string fuzzed = FuzzWhere(baseQuery, rnd);
 
-            Exception? ex = Record.Exception(() =>
+            Assert.DoesNotThrow(() =>
             {
                 var result = JsonAiEngine.Execute(_root, _graph, fuzzed, _sql);
             });
 
-            Assert.Null(ex); // El parser WHERE debe ser robusto
+            Assert.That(ex, Is.Null); // El parser WHERE debe ser robusto
         }
     }
 

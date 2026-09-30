@@ -29,29 +29,29 @@ public class JsonGraphTests
     [Test]
     public void Graph_ShouldBuildNodesAndEdges()
     {
-        Assert.Equal(3, _graph.Nodes.Count);
-        Assert.Equal(3, _graph.Edges.Count);
+        Assert.That(_graph.Nodes.Count, Is.EqualTo(3));
+        Assert.That(_graph.Edges.Count, Is.EqualTo(3));
     }
 
     [Test]
     public void BFS_ShouldReturnTraversal()
     {
         var bfs = _graph.Bfs("A");
-        Assert.Equal(sourceArray.OrderBy(x => x), bfs.OrderBy(x => x));
+        Assert.That(bfs.OrderBy(x => x), Is.EqualTo(sourceArray.OrderBy(x => x)));
     }
 
     [Test]
     public void FindPath_ShouldReturnCorrectPath()
     {
         var path = _graph.FindPath("A", "B");
-        Assert.Equal(expected, path);
+        Assert.That(path, Is.EqualTo(expected));
     }
 
     [Test]
     public void PageRank_ShouldReturnScores()
     {
         var pr = _graph.PageRank();
-        Assert.Equal(3, pr.Count);
+        Assert.That(pr.Count, Is.EqualTo(3));
     }
 
     [Test]

@@ -82,11 +82,11 @@ public class JsonAiEngineIntegrationTests
 
         List<List<string>> results = queries.Select(q => JsonAiEngine.Execute(root, graph, q, sql)).Select(r => r.Select(x => x["id"]!.ToString().Trim('"')).ToList()).ToList();
 
-        Assert.Equal(results[0], results[1]);
-        Assert.Equal(results[1], results[2]);
+        Assert.That(results[1], Is.EqualTo(results[0]));
+        Assert.That(results[2], Is.EqualTo(results[1]));
 
-        Assert.Equal("A", results[0][0]);
-        Assert.Equal("D", results[0][1]);
+        Assert.That(results[0][0], Is.EqualTo("A"));
+        Assert.That(results[0][1], Is.EqualTo("D"));
     }
     [Test]
     public void Conditions_ShouldFilterCorrectly()
@@ -117,10 +117,10 @@ public class JsonAiEngineIntegrationTests
 
         List<string> ids = result.Select(r => r["id"]!.ToString().Trim('"')).ToList();
 
-        Assert.Contains("A", ids);
-        Assert.Contains("C", ids);
-        Assert.DoesNotContain("D", ids);
-        Assert.DoesNotContain("B", ids);
+        Assert.That(ids, Does.Contain("A"));
+        Assert.That(ids, Does.Contain("C"));
+        Assert.That(ids, Does.Not.Contain("D"));
+        Assert.That(ids, Does.Not.Contain("B"));
     }
     [Test]
     public void OrderByAndLimit_ShouldSortAndLimitCorrectly()
@@ -151,9 +151,9 @@ public class JsonAiEngineIntegrationTests
 
         List<Dictionary<string, JsonNode?>> result = JsonAiEngine.Execute(root, graph, aiQuery, sql);
 
-        Assert.Equal(2, result.Count);
-        Assert.Equal("A", result[0]["id"]!.ToString().Trim('"'));
-        Assert.Equal("D", result[1]["id"]!.ToString().Trim('"'));
+        Assert.That(result.Count, Is.EqualTo(2));
+        Assert.That(result[0]["id"]!.ToString().Trim('"'), Is.EqualTo("A"));
+        Assert.That(result[1]["id"]!.ToString().Trim('"'), Is.EqualTo("D"));
 
     }
     [Test]
@@ -181,9 +181,9 @@ public class JsonAiEngineIntegrationTests
 
         List<Dictionary<string, JsonNode?>> result = JsonAiEngine.Execute(root, graph, aiQuery, sql);
 
-        Assert.Equal(2, result.Count);
-        Assert.Equal(root["items"]![0]!.ToString(), result[0]["*"]!.ToString());
-        Assert.Equal(root["items"]![1]!.ToString(), result[1]["*"]!.ToString());
+        Assert.That(result.Count, Is.EqualTo(2));
+        Assert.That(result[0]["*"]!.ToString(), Is.EqualTo(root["items"]![0]!.ToString()));
+        Assert.That(result[1]["*"]!.ToString(), Is.EqualTo(root["items"]![1]!.ToString()));
     }
     [Test]
     public void StressTest_10000Nodes_50000Edges()
@@ -230,8 +230,8 @@ public class JsonAiEngineIntegrationTests
         List<Dictionary<string, JsonNode?>> result = JsonAiEngine.Execute(root, graph, aiQuery, sql);
         sw.Stop();
 
-        Assert.NotEmpty(result);
-        Assert.True(sw.ElapsedMilliseconds < 2000, $"Tardó {sw.ElapsedMilliseconds} ms");
+        Assert.That(result, Is.Not.Empty);
+        Assert.That(sw.ElapsedMilliseconds < 2000, $"Tardó {sw.ElapsedMilliseconds} ms", Is.True);
     }
     [Test]
     public void JsonAI_EndToEnd_ShouldReturnRankedExpensiveItems()
@@ -244,23 +244,23 @@ public class JsonAiEngineIntegrationTests
         List<Dictionary<string, JsonNode?>> result = JsonAiEngine.Execute(_root, _graph, aiQuery, _sql);
 
         // Validaciones
-        Assert.NotEmpty(result);
+        Assert.That(result, Is.Not.Empty);
 
         // Extraer IDs
         List<string> ids = result.Select(r => r["id"]!.ToString().Trim('"')).ToList();
 
         // Items caros: A (120), D (80), C (40)
-        Assert.Contains("A", ids);
-        Assert.Contains("D", ids);
-        Assert.Contains("C", ids);
+        Assert.That(ids, Does.Contain("A"));
+        Assert.That(ids, Does.Contain("D"));
+        Assert.That(ids, Does.Contain("C"));
 
         // PageRank real: A > C > D > B
         int indexA = ids.IndexOf("A");
         int indexC = ids.IndexOf("C");
         int indexD = ids.IndexOf("D");
 
-        Assert.True(indexA < indexC);
-        Assert.True(indexD < indexC);
+        Assert.That(indexA < indexC, Is.True);
+        Assert.That(indexD < indexC, Is.True);
     }
     [Test]
     public void JsonAI_Conditions_ShouldFilterCorrectly()
@@ -291,10 +291,10 @@ public class JsonAiEngineIntegrationTests
 
         List<string> ids = result.Select(r => r["id"]!.ToString().Trim('"')).ToList();
 
-        Assert.Contains("A", ids); // 120
-        Assert.Contains("C", ids); // 40
-        Assert.DoesNotContain("D", ids); // 80 excluido
-        Assert.DoesNotContain("B", ids); // 5 excluido
+        Assert.That(ids, Does.Contain("A")); // 120
+        Assert.That(ids, Does.Contain("C")); // 40
+        Assert.That(ids, Does.Not.Contain("D")); // 80 excluido
+        Assert.That(ids, Does.Not.Contain("B")); // 5 excluido
     }
     [Test]
     public void JsonAI_OrderByAndLimit_ShouldSortAndLimitCorrectly()
@@ -325,9 +325,9 @@ public class JsonAiEngineIntegrationTests
 
         List<Dictionary<string, JsonNode?>> result = JsonAiEngine.Execute(root, graph, aiQuery, sql);
 
-        Assert.Equal(2, result.Count);
-        Assert.Equal("A", result[0]["id"]!.ToString().Trim('"')); // 120
-        Assert.Equal("D", result[1]["id"]!.ToString().Trim('"')); // 80
+        Assert.That(result.Count, Is.EqualTo(2));
+        Assert.That(result[0]["id"]!.ToString().Trim('"'), Is.EqualTo("A")); // 120
+        Assert.That(result[1]["id"]!.ToString().Trim('"'), Is.EqualTo("D")); // 80
     }
     [Test]
     public void JsonAI_ReturnAll_ShouldReturnRawJsonNodes()
@@ -354,11 +354,11 @@ public class JsonAiEngineIntegrationTests
 
         List<Dictionary<string, JsonNode?>> result = JsonAiEngine.Execute(root, graph, aiQuery, sql);
 
-        Assert.Equal(2, result.Count);
+        Assert.That(result.Count, Is.EqualTo(2));
 
         // Debe devolver el nodo completo
-        Assert.Equal(root["items"]![0]!.ToString(), result[0]["*"]!.ToString());
-        Assert.Equal(root["items"]![1]!.ToString(), result[1]["*"]!.ToString());
+        Assert.That(result[0]["*"]!.ToString(), Is.EqualTo(root["items"]![0]!.ToString()));
+        Assert.That(result[1]["*"]!.ToString(), Is.EqualTo(root["items"]![1]!.ToString()));
     }
 
 }

@@ -76,7 +76,7 @@ public class JsonAiEngineMoqTests
         // -----------------------------
         // ASSERTS
         // -----------------------------
-        Assert.Equal(2, result.Count);          // Debe devolver 2 filas
-        Assert.Equal("A", result[0]["id"]!.ToString().Trim('"')); // A debe ir primero por PageRank
+        Assert.That(result.Count, Is.EqualTo(2));          // Debe devolver 2 filas
+        Assert.That(result[0]["id"]!.ToString().Trim('"'), Is.EqualTo("A")); // A debe ir primero por PageRank
     }
 }
