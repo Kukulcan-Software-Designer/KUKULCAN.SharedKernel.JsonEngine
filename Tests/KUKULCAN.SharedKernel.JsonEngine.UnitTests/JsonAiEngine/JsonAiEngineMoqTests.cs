@@ -1,4 +1,6 @@
 ﻿using System.Text.Json.Nodes;
+using KUKULCAN.SharedKernel.JsonEngine.Graph;
+using KUKULCAN.SharedKernel.JsonEngine.SQL;
 using Moq;
 
 namespace KUKULCAN.SharedKernel.JsonEngine.UnitTests.JsonAiEngine;

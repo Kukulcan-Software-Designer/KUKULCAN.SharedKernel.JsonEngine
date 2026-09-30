@@ -231,7 +231,7 @@ public class JsonAiEngineIntegrationTests
         sw.Stop();
 
         Assert.That(result, Is.Not.Empty);
-        Assert.That(sw.ElapsedMilliseconds < 2000, $"Tardó {sw.ElapsedMilliseconds} ms", Is.True);
+        Assert.That(sw.ElapsedMilliseconds < 2000, Is.True, $"Tardó {sw.ElapsedMilliseconds} ms");
     }
     [Test]
     public void JsonAI_EndToEnd_ShouldReturnRankedExpensiveItems()

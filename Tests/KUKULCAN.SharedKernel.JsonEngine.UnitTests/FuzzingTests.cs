@@ -168,7 +168,7 @@ namespace KUKULCAN.SharedKernel.JsonEngine.UnitTests
             long delta = after - before;
             // Allow some buffer for allocations; fail if growth > 20MB
             const long threshold = 20 * 1024 * 1024;
-            Assert.That(delta < threshold, $"Memory grew by {delta} bytes which exceeds threshold {threshold}", Is.True);
+            Assert.That(delta < threshold, Is.True, $"Memory grew by {delta} bytes which exceeds threshold {threshold}");
         }
 
         [Test]
@@ -193,7 +193,7 @@ namespace KUKULCAN.SharedKernel.JsonEngine.UnitTests
             double avgMs = sw.Elapsed.TotalMilliseconds / n;
             // If average per operation grows too large, consider it a regression. 50ms is conservative.
             const double thresholdMs = 50.0;
-            Assert.That(avgMs < thresholdMs, $"Average operation time {avgMs:0.00}ms exceeds threshold {thresholdMs}ms", Is.True);
+            Assert.That(avgMs < thresholdMs, Is.True, $"Average operation time {avgMs:0.00}ms exceeds threshold {thresholdMs}ms");
         }
     }
 }
