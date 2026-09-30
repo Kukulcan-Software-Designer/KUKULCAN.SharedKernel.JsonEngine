@@ -110,7 +110,7 @@ dotnet add <your-project>.csproj reference Source/KUKULCAN.SharedKernel.JsonEngi
 ## Basic Usage
 
 ```csharp
-using KUKULCAN.Kernel.JsonEngine;
+using KUKULCAN.SharedKernel.JsonEngine;
 
 var root = JsonCore.Parse("""
 {
@@ -151,8 +151,8 @@ Supported path style:
 `JsonSqlEngine` executes a small SQL-like dialect over JSON arrays.
 
 ```csharp
-using KUKULCAN.Kernel.JsonEngine;
-using KUKULCAN.Kernel.JsonEngine.SQL;
+using KUKULCAN.SharedKernel.JsonEngine;
+using KUKULCAN.SharedKernel.JsonEngine.SQL;
 
 var root = JsonCore.Parse("""
 {
@@ -203,8 +203,8 @@ LIMIT 10
 `JsonGraph` builds a directed graph from JSON nodes. Each node is stored by an ID field, and edges are read from a dependency array.
 
 ```csharp
-using KUKULCAN.Kernel.JsonEngine;
-using KUKULCAN.Kernel.JsonEngine.Graph;
+using KUKULCAN.SharedKernel.JsonEngine;
+using KUKULCAN.SharedKernel.JsonEngine.Graph;
 
 var root = JsonCore.Parse("""
 {
@@ -242,8 +242,8 @@ var pageRank = graph.PageRank();
 `JsonIndexEngine` creates in-memory indexes over a `JsonArray`.
 
 ```csharp
-using KUKULCAN.Kernel.JsonEngine;
-using KUKULCAN.Kernel.JsonEngine.Index;
+using KUKULCAN.SharedKernel.JsonEngine;
+using KUKULCAN.SharedKernel.JsonEngine.Index;
 
 var items = JsonCore.JsonPath(root, "$.items")!.AsArray();
 
@@ -292,7 +292,7 @@ AI QUERY:
 `JsonAiNl.ToAiQuery(...)` is a rule-based helper that converts simple supported user text into an `AI QUERY`.
 
 ```csharp
-using KUKULCAN.Kernel.JsonEngine.AI;
+using KUKULCAN.SharedKernel.JsonEngine.AI;
 
 var aiQuery = JsonAiNl.ToAiQuery(
     "Muestrame los items caros y sus dependencias ordenadas por importancia"
@@ -316,10 +316,10 @@ The current rule set is Spanish-oriented and recognizes these patterns:
 ### End-to-End Execution
 
 ```csharp
-using KUKULCAN.Kernel.JsonEngine;
-using KUKULCAN.Kernel.JsonEngine.AI;
-using KUKULCAN.Kernel.JsonEngine.Graph;
-using KUKULCAN.Kernel.JsonEngine.SQL;
+using KUKULCAN.SharedKernel.JsonEngine;
+using KUKULCAN.SharedKernel.JsonEngine.AI;
+using KUKULCAN.SharedKernel.JsonEngine.Graph;
+using KUKULCAN.SharedKernel.JsonEngine.SQL;
 
 var root = JsonCore.Parse(jsonText)!;
 
@@ -358,7 +358,7 @@ dotnet test KUKULCAN.SharedKernel.JsonEngine.slnx
 Run only the test project:
 
 ```bash
-dotnet test Tests/KUKULCAN.SharedKernel.JsonEngine.Tests/KUKULCAN.SharedKernel.JsonEngine.Tests.csproj
+dotnet test Tests/KUKULCAN.SharedKernel.JsonEngine.UnitTests/KUKULCAN.SharedKernel.JsonEngine.UnitTests.csproj
 ```
 
 With coverage:
@@ -410,6 +410,29 @@ This library intentionally implements compact in-memory engines, not full standa
 |-----------------|---------|
 | `VersionPrefix` | `0.0.1` |
 | `NuGetAudit`    | `true`  |
+
+---
+
+## Documentation
+
+Technical documentation is available under [Documentation/README.md](Documentation/README.md).
+
+It covers:
+
+- architecture and component boundaries;
+- accepted architectural decisions;
+- configuration and integration boundaries;
+- unit, integration, mocking and fuzzing strategy;
+- code coverage policy and interpretation.
+
+Repository governance is documented in:
+
+- [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
+- [CONTRIBUTING.md](CONTRIBUTING.md)
+- [SECURITY.md](SECURITY.md)
+- [SUPPORT.md](SUPPORT.md)
+- [CHANGELOG.md](CHANGELOG.md)
+- [ROADMAP.md](ROADMAP.md)
 
 ---
 
