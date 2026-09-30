@@ -1,10 +1,12 @@
 ﻿using System.Text.Json.Nodes;
+using KUKULCAN.SharedKernel.JsonEngine.Graph;
+using KUKULCAN.SharedKernel.JsonEngine.SQL;
 
 namespace KUKULCAN.SharedKernel.JsonEngine.UnitTests.JsonAiEngine;
 
 public class JsonAiEngineStress
 {
-    [Fact]
+    [Test]
     public void JsonAI_StressTest_10000Nodes_50000Edges()
     {
         const int nodeCount = 10000;
@@ -74,7 +76,7 @@ public class JsonAiEngineStress
         // -----------------------------
         // Validaciones
         // -----------------------------
-        Assert.NotEmpty(result);
-        Assert.True(sw.ElapsedMilliseconds < 2000, $"El test tardó demasiado: {sw.ElapsedMilliseconds} ms");
+        Assert.That(result, Is.Not.Empty);
+        Assert.That(sw.ElapsedMilliseconds < 2000, Is.True, $"El test tardó demasiado: {sw.ElapsedMilliseconds} ms");
     }
 }

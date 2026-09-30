@@ -51,7 +51,7 @@ namespace KUKULCAN.SharedKernel.JsonEngine.UnitTests
             };
         }
 
-        [Fact]
+        [Test]
         public void CombinatorialFuzzing_AllMutations_NoUnhandledExceptions()
         {
             var rnd = new Random(12345);
@@ -105,7 +105,7 @@ namespace KUKULCAN.SharedKernel.JsonEngine.UnitTests
             }
         }
 
-        [Fact]
+        [Test]
         public void ParallelFuzzing_Multithread_NoRaceConditionsOrCrashes()
         {
             var exceptions = new ConcurrentBag<Exception>();
@@ -141,7 +141,7 @@ namespace KUKULCAN.SharedKernel.JsonEngine.UnitTests
             Assert.Fail("Exceptions occurred during parallel fuzzing: " + first);
         }
 
-        [Fact]
+        [Test]
         public void MemoryLeakFuzzing_DetectsSignificantGrowth()
         {
             GC.Collect(); GC.WaitForPendingFinalizers(); GC.Collect();
@@ -168,10 +168,10 @@ namespace KUKULCAN.SharedKernel.JsonEngine.UnitTests
             long delta = after - before;
             // Allow some buffer for allocations; fail if growth > 20MB
             const long threshold = 20 * 1024 * 1024;
-            Assert.True(delta < threshold, $"Memory grew by {delta} bytes which exceeds threshold {threshold}");
+            Assert.That(delta < threshold, Is.True, $"Memory grew by {delta} bytes which exceeds threshold {threshold}");
         }
 
-        [Fact]
+        [Test]
         public void PerformanceFuzzing_DetectsDegradation()
         {
             // Warmup
@@ -193,7 +193,7 @@ namespace KUKULCAN.SharedKernel.JsonEngine.UnitTests
             double avgMs = sw.Elapsed.TotalMilliseconds / n;
             // If average per operation grows too large, consider it a regression. 50ms is conservative.
             const double thresholdMs = 50.0;
-            Assert.True(avgMs < thresholdMs, $"Average operation time {avgMs:0.00}ms exceeds threshold {thresholdMs}ms");
+            Assert.That(avgMs < thresholdMs, Is.True, $"Average operation time {avgMs:0.00}ms exceeds threshold {thresholdMs}ms");
         }
     }
 }

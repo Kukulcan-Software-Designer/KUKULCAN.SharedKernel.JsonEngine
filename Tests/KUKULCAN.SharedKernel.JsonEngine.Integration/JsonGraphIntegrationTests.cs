@@ -7,7 +7,7 @@ namespace KUKULCAN.SharedKernel.JsonEngine.Integration;
 
 public class JsonGraphIntegrationTests
 {
-    [Fact]
+    [Test]
     public void JsonAI_GraphExpand_WithLevels_ShouldExpandCorrectly()
     {
         JsonNode root = JsonNode.Parse("""
@@ -37,12 +37,12 @@ public class JsonGraphIntegrationTests
 
         List<string> ids = result.Select(r => r["id"]!.ToString().Trim('\"')).ToList();
 
-        Assert.Contains("A", ids);
-        Assert.Contains("B", ids);
-        Assert.Contains("C", ids);
-        Assert.Contains("D", ids); // B → D (2 niveles)
+        Assert.That(ids, Does.Contain("A"));
+        Assert.That(ids, Does.Contain("B"));
+        Assert.That(ids, Does.Contain("C"));
+        Assert.That(ids, Does.Contain("D")); // B → D (2 niveles)
     }
-    [Fact]
+    [Test]
     public void GraphExpand_WithLevels_ShouldExpandCorrectly()
     {
         JsonNode root = JsonNode.Parse("""
@@ -72,9 +72,9 @@ public class JsonGraphIntegrationTests
 
         List<string> ids = result.Select(r => r["id"]!.ToString().Trim('\"')).ToList();
 
-        Assert.Contains("A", ids);
-        Assert.Contains("B", ids);
-        Assert.Contains("C", ids);
-        Assert.Contains("D", ids);
+        Assert.That(ids, Does.Contain("A"));
+        Assert.That(ids, Does.Contain("B"));
+        Assert.That(ids, Does.Contain("C"));
+        Assert.That(ids, Does.Contain("D"));
     }
 }

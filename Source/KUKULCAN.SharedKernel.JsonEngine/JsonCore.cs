@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Nodes;
+﻿using System.Globalization;
+using System.Text.Json.Nodes;
 using System.Text.RegularExpressions;
 
 namespace KUKULCAN.SharedKernel.JsonEngine;
@@ -176,7 +177,7 @@ public static class JsonCore
         string s = n.ToString();
         if (s.StartsWith("\"") && s.EndsWith("\"") && s.Length >= 2)
             s = s[1..^1];
-        if (double.TryParse(s, out d))
+        if (double.TryParse(s, NumberStyles.Float, CultureInfo.InvariantCulture, out d))
             return d;
         return null;
     }
@@ -253,7 +254,7 @@ public static class JsonCore
 
         // Try numeric comparison first
         double? leftNum = GetDouble(obj, left);
-        if (leftNum.HasValue && double.TryParse(right, out double rightNum))
+        if (leftNum.HasValue && double.TryParse(right, NumberStyles.Float, CultureInfo.InvariantCulture, out double rightNum))
         {
             return op switch
             {

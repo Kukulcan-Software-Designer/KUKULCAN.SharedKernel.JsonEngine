@@ -26,31 +26,53 @@ public class JsonGraphTests
         _graph.Build(root, "$.items", "id", "dependencias");
     }
 
-    [Fact]
+    [Test]
     public void Graph_ShouldBuildNodesAndEdges()
     {
-        Assert.Equal(3, _graph.Nodes.Count);
-        Assert.Equal(3, _graph.Edges.Count);
+        Assert.That(_graph.Nodes.Count, Is.EqualTo(3));
+        Assert.That(_graph.Edges.Count, Is.EqualTo(3));
     }
 
-    [Fact]
+    [Test]
     public void BFS_ShouldReturnTraversal()
     {
         var bfs = _graph.Bfs("A");
-        Assert.Equal(sourceArray.OrderBy(x => x), bfs.OrderBy(x => x));
+        Assert.That(bfs.OrderBy(x => x), Is.EqualTo(sourceArray.OrderBy(x => x)));
     }
 
-    [Fact]
+    [Test]
     public void FindPath_ShouldReturnCorrectPath()
     {
         var path = _graph.FindPath("A", "B");
-        Assert.Equal(expected, path);
+        Assert.That(path, Is.EqualTo(expected));
     }
 
-    [Fact]
+    [Test]
     public void PageRank_ShouldReturnScores()
     {
         var pr = _graph.PageRank();
-        Assert.Equal(3, pr.Count);
+        Assert.That(pr.Count, Is.EqualTo(3));
     }
+
+    [Test]
+    public void Build_ShouldStoreScalarIdentifiersWithoutJsonQuotes()
+    {
+        Assert.That(_graph.Nodes.Keys, Does.Contain("A"));
+        Assert.That(_graph.Bfs("A"), Does.Contain("B"));
+    }
+
+    [Test]
+    public void Build_ShouldReplacePreviousGraphState()
+    {
+        var root = JsonCore.Parse("""{ "items": [{ "id": "X", "dependencias": [] }] }""")!;
+        var graph = new JsonGraph();
+        graph.Build(root, "$.items", "id", "dependencias");
+        Assert.That(graph.Nodes.Keys, Is.EquivalentTo(new[] { "X" }));
+    }
+
+    [Test]
+    public void Dfs_ShouldReturnEmptyForUnknownNode() => Assert.That(_graph.Dfs("UNKNOWN"), Is.Empty);
+
+    [Test]
+    public void PageRank_ShouldHandleEmptyGraph() => Assert.That(new JsonGraph().PageRank(), Is.Empty);
 }
