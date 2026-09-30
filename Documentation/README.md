@@ -13,4 +13,3 @@ This directory contains the technical documentation for the JSON processing libr
 - [TESTING.md](TESTING.md) — unit, integration, fuzzing and mocking strategy.
 - [COVERAGE.md](COVERAGE.md) — coverage scope and interpretation.
 
-The repository root also contains [CONTRIBUTING.md](../CONTRIBUTING.md), [SECURITY.md](../SECURITY.md), [SUPPORT.md](../SUPPORT.md), [ROADMAP.md](../ROADMAP.md) and [CHANGELOG.md](../CHANGELOG.md).

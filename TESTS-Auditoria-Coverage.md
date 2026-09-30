@@ -10,9 +10,9 @@ The goal is not to maximize a coverage percentage artificially. The goal is to e
 
 JsonEngine currently separates automated tests into:
 
-| Area | Responsibility |
-|---|---|
-| `KUKULCAN.SharedKernel.JsonEngine.UnitTests` | Focused production behavior and component-level contracts |
+| Area                                           | Responsibility                                                                                      |
+|------------------------------------------------|-----------------------------------------------------------------------------------------------------|
+| `KUKULCAN.SharedKernel.JsonEngine.UnitTests`   | Focused production behavior and component-level contracts                                           |
 | `KUKULCAN.SharedKernel.JsonEngine.Integration` | Behavior that requires meaningful interaction between JsonEngine components or execution boundaries |
 
 The repository does not require database-provider integration projects because JsonEngine does not own relational persistence infrastructure.
