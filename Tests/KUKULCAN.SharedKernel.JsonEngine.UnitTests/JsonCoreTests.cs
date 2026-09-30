@@ -25,7 +25,7 @@ public class JsonCoreTests
     public void Parse_ShouldLoadJson()
     {
         Assert.That(_root, Is.Not.Null);
-        Assert.That("item.id"), Is.EqualTo("A", JsonCore.GetString(_root));
+        Assert.That(JsonCore.GetString(_root, "item.id"), Is.EqualTo("A"));
     }
 
     [Test]

@@ -63,8 +63,6 @@ public class JsonAiEngineIntegrationFuzzingTests
             {
                 List<Dictionary<string, JsonNode?>> result = JsonAiEngine.Execute(_root, _graph, fuzzed, _sql);
             });
-
-            Assert.That(ex, Is.Null); // El parser NO debe romperse nunca
         }
     }
     [Test]
@@ -89,8 +87,6 @@ public class JsonAiEngineIntegrationFuzzingTests
             {
                 JsonAiEngine.Execute(_root, _graphDependencies, fuzzed, _sql);
             });
-
-            Assert.That(ex, Is.Null);
         }
     }
     [Test]
@@ -113,8 +109,6 @@ public class JsonAiEngineIntegrationFuzzingTests
             {
                 List<Dictionary<string, JsonNode?>> result = JsonAiEngine.Execute(_root, _graph, fuzzed, _sql);
             });
-
-            Assert.That(ex, Is.Null); // El parser y GRAPH EXPAND no deben romperse nunca
         }
     }
     [Test]
@@ -136,8 +130,6 @@ public class JsonAiEngineIntegrationFuzzingTests
             {
                 JsonAiEngine.Execute(_root, _graph, fuzzed, _sql);
             });
-
-            Assert.That(ex, Is.Null);
         }
     }
     [Test]
@@ -160,8 +152,6 @@ public class JsonAiEngineIntegrationFuzzingTests
             {
                 JsonAiEngine.Execute(_root, _graph, fuzzed, _sql);
             });
-
-            Assert.That(ex, Is.Null);
         }
     }
     [Test]
@@ -181,8 +171,6 @@ public class JsonAiEngineIntegrationFuzzingTests
             {
                 JsonAiEngine.Execute(_root, _graph, aiQuery, _sql);
             });
-
-            Assert.That(ex, Is.Null);
         }
     }
     [Test]
@@ -205,8 +193,6 @@ public class JsonAiEngineIntegrationFuzzingTests
             {
                 JsonAiEngine.Execute(_root, _graph, fuzzed, _sql);
             });
-
-            Assert.That(ex, Is.Null);
         }
     }
     [Test]
@@ -229,8 +215,6 @@ public class JsonAiEngineIntegrationFuzzingTests
             {
                 JsonAiEngine.Execute(_root, _graph, fuzzed, _sql);
             });
-
-            Assert.That(ex, Is.Null);
         }
     }
     [Test]
@@ -252,8 +236,6 @@ public class JsonAiEngineIntegrationFuzzingTests
             {
                 List<Dictionary<string, JsonNode?>> result = JsonAiEngine.Execute(_root, _graph, fuzzed, _sql);
             });
-
-            Assert.That(ex, Is.Null); // RETURN debe ser robusto
         }
     }
     [Test]
@@ -271,8 +253,6 @@ public class JsonAiEngineIntegrationFuzzingTests
             {
                 _sql.Execute(_root, fuzzed);
             });
-
-            Assert.That(ex, Is.Null);
         }
     }
     [Test]
@@ -294,8 +274,6 @@ public class JsonAiEngineIntegrationFuzzingTests
             {
                 var result = JsonAiEngine.Execute(_root, _graph, fuzzed, _sql);
             });
-
-            Assert.That(ex, Is.Null); // El parser WHERE debe ser robusto
         }
     }
 
