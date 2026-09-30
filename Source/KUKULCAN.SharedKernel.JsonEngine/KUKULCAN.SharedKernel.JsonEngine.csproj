@@ -1,9 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <TargetFramework>net10.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
-    </PropertyGroup>
+  <PropertyGroup>
+      <TargetFramework>net10.0</TargetFramework>
+      <OutputType>Library</OutputType>
+      <LangVersion>latestmajor</LangVersion>
+      <Nullable>enable</Nullable>
+      <ImplicitUsings>enable</ImplicitUsings>
+      <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+      <RootNamespace>KUKULCAN.SharedKernel.JsonEngine</RootNamespace>
+      <AssemblyName>KUKULCAN.SharedKernel.JsonEngine</AssemblyName>
+      <BaseOutputPath>$(MSBuildThisFileDirectory)..\..\Bin\$(MSBuildProjectName)\</BaseOutputPath>
+      <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
 
 </Project>
