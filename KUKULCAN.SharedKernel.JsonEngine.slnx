@@ -1,0 +1,34 @@
+<Solution>
+  <Folder Name="/Documentation/" />
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path=".gitignore" />
+    <File Path="Directory.Build.props" />
+    <File Path="LICENSE" />
+    <File Path="README.md" />
+  </Folder>
+  <Folder Name="/Solution Items/.github/" />
+  <Folder Name="/Solution Items/.github/workflows/">
+    <File Path=".github\workflows\ci.yml" />
+    <File Path=".github\workflows\coverage.yml" />
+    <File Path=".github\workflows\delete-merged-branches.yml" />
+    <File Path=".github\workflows\publish-nuget.yml" />
+  </Folder>
+  <Folder Name="/Solution Items/build/" />
+  <Folder Name="/Solution Items/build/coverage/">
+    <File Path="build\coverage\coverage.runsettings" />
+    <File Path="build\coverage\generate_coverage.ps1" />
+    <File Path="build\coverage\generate_coverage.sh" />
+  </Folder>
+  <Folder Name="/Source/">
+    <Project Path="Source/KUKULCAN.SharedKernel.JsonEngine/KUKULCAN.SharedKernel.JsonEngine.csproj" />
+    <Project Path="Source\KUKULCAN.SharedKernel.JsonEngine.Benchmark\KUKULCAN.SharedKernel.JsonEngine.Benchmark.csproj" />
+  </Folder>
+  <Folder Name="/SourceClient/">
+    <Project Path="SourceClient\KUKULCAN.SharedKernel.JsonEngine.Client\KUKULCAN.SharedKernel.JsonEngine.Client.csproj" />
+  </Folder>
+  <Folder Name="/Tests/">
+    <Project Path="Tests\KUKULCAN.SharedKernel.JsonEngine.Integration\KUKULCAN.SharedKernel.JsonEngine.Integration.csproj" />
+    <Project Path="Tests\KUKULCAN.SharedKernel.JsonEngine.UnitTests\KUKULCAN.SharedKernel.JsonEngine.UnitTests.csproj" />
+  </Folder>
+</Solution>

@@ -1,0 +1,35 @@
+<Project>
+    <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+        <GeneratePackageOnBuild Condition="'$(Configuration)'=='Release'">true</GeneratePackageOnBuild>
+        <SolutionDir>$(MSBuildThisFileDirectory)</SolutionDir>
+        <PackageId>$(AssemblyName)</PackageId>
+        <Version>$(VersionPrefix)</Version>
+        <Authors>Kukulcán Software Designer</Authors>
+        <Company>Kukulcán Software Designer</Company>
+        <Copyright>GPL 2026 Kukulcán Software Designer</Copyright>
+        <PackageProjectUrl>https://www.kukulcan.mx/Software/KernelJsonEngine</PackageProjectUrl>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageOutputPath>$(SolutionDir)NuGet\</PackageOutputPath>
+        <PackageTags>kukulcan;kernel;json;jsonengine;database;efcore;ai</PackageTags>
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
+        <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+        <PackageReleaseNotes>
+            This revision corrects the following:
+
+            - Spelling errors related to the URL where the class library is located.
+            - Spelling errors in the organization name.
+        </PackageReleaseNotes>
+        <RepositoryUrl>https://github.com/Kukulcan-Software-Designer/KUKULCAN.Kernel.JsonEngine</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <Description>KUKULCAN.SharedKernel.JsonEngine is a lightweight class library that provides JSON serialization, deserialization, and schema-aware processing for Kukulcan Software Designer applications.
+			It offers typed converters, configuration binding, and extension points to standardize data exchange between core services, plugins, and persistence layers.
+			Use it to read/write JSON configurations, validate payloads, map domain types, and implement custom converters for platform-specific objects.
+			Designed to be modular and have few dependencies, it integrates seamlessly into the Kukulcan Software Designer ecosystem as the standard JSON engine for kernel-level data handling and interoperability.
+		</Description>
+    </PropertyGroup>
+
+	<ItemGroup Condition="'$(Configuration)' == 'Release'">
+		<None Include="$(SolutionDir)LICENSE" Pack="true" PackagePath="\" />
+		<None Include="$(SolutionDir)README.md" Pack="true" PackagePath="\" />
+	</ItemGroup>
+</Project>
