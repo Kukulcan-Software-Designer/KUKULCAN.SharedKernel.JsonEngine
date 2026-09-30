@@ -1,0 +1,37 @@
+name: Reference Client
+
+on:
+  push:
+    branches:
+      - main
+      - 'CLIENT/**'
+      - 'FEATURES/**'
+  pull_request:
+    branches:
+      - main
+      - Develop
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-client:
+    name: Build KUKULCAN.SharedKernel.JsonEngine.Client
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Restore client
+        run: dotnet restore SourceClient/KUKULCAN.SharedKernel.JsonEngine.Client/KUKULCAN.SharedKernel.JsonEngine.Client.csproj
+
+      - name: Build client
+        run: dotnet build SourceClient/KUKULCAN.SharedKernel.JsonEngine.Client/KUKULCAN.SharedKernel.JsonEngine.Client.csproj --no-restore --configuration Release
