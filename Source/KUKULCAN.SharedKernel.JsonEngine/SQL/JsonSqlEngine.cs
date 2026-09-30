@@ -70,9 +70,11 @@ public class JsonSqlEngine : IJsonSqlEngine
         // ORDER BY
         if (!string.IsNullOrWhiteSpace(stmt.OrderByField))
         {
-            query = stmt.OrderByDir.Equals("DESC", StringComparison.OrdinalIgnoreCase)
-                ? query.OrderByDescending(n => JsonCore.Get(n, stmt.OrderByField)?.ToString())
-                : query.OrderBy(n => JsonCore.Get(n, stmt.OrderByField)?.ToString());
+            Func<JsonNode?, double?> getNumber = n => JsonCore.GetDouble(n, stmt.OrderByField);
+            if (query.All(n => getNumber(n).HasValue))
+                query = stmt.OrderByDir.Equals("DESC", StringComparison.OrdinalIgnoreCase) ? query.OrderByDescending(getNumber) : query.OrderBy(getNumber);
+            else
+                query = stmt.OrderByDir.Equals("DESC", StringComparison.OrdinalIgnoreCase) ? query.OrderByDescending(n => JsonCore.Get(n, stmt.OrderByField)?.ToString(), StringComparer.OrdinalIgnoreCase) : query.OrderBy(n => JsonCore.Get(n, stmt.OrderByField)?.ToString(), StringComparer.OrdinalIgnoreCase);
         }
 
         // LIMIT
@@ -160,7 +162,7 @@ internal sealed class JsonSqlStatement
             return stmt;
 
         string limStr = text[(limitIdx + 5)..].Trim();
-        if (int.TryParse(limStr, out int lim))
+        if (int.TryParse(limStr, out int lim) && lim >= 0)
             stmt.Limit = lim;
 
         return stmt;

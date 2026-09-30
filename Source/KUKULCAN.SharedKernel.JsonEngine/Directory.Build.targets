@@ -1,7 +1,7 @@
 <Project>
     <PropertyGroup Condition="'$(Configuration)' == 'Release'">
         <GeneratePackageOnBuild Condition="'$(Configuration)'=='Release'">true</GeneratePackageOnBuild>
-        <SolutionDir>$(MSBuildThisFileDirectory)</SolutionDir>
+        <SolutionDir>$(MSBuildThisFileDirectory)..\..\</SolutionDir>
         <PackageId>$(AssemblyName)</PackageId>
         <Version>$(VersionPrefix)</Version>
         <Authors>Kukulcán Software Designer</Authors>

@@ -1,11 +1,14 @@
 ﻿using System.Text.Json.Nodes;
+using KUKULCAN.SharedKernel.JsonEngine.Graph.Interfaces;
+using KUKULCAN.SharedKernel.JsonEngine.SQL;
+using KUKULCAN.SharedKernel.JsonEngine.SQL.Interfaces;
 using Moq;
 
 namespace KUKULCAN.SharedKernel.JsonEngine.UnitTests.JsonAiEngine;
 
 public class JsonAiEngineMoqTests
 {
-    [Fact]
+    [Test]
     public void Execute_ShouldUseMocksCorrectly()
     {
         // JSON raíz simulado
@@ -76,7 +79,7 @@ public class JsonAiEngineMoqTests
         // -----------------------------
         // ASSERTS
         // -----------------------------
-        Assert.Equal(2, result.Count);          // Debe devolver 2 filas
-        Assert.Equal("A", result[0]["id"]!.ToString().Trim('"')); // A debe ir primero por PageRank
+        Assert.That(result.Count, Is.EqualTo(2));          // Debe devolver 2 filas
+        Assert.That(result[0]["id"]!.ToString().Trim('"'), Is.EqualTo("A")); // A debe ir primero por PageRank
     }
 }

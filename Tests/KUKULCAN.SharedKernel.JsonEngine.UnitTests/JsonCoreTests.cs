@@ -21,31 +21,31 @@ public class JsonCoreTests
         _root = JsonCore.Parse(json)!;
     }
 
-    [Fact]
+    [Test]
     public void Parse_ShouldLoadJson()
     {
-        Assert.NotNull(_root);
-        Assert.Equal("A", JsonCore.GetString(_root, "item.id"));
+        Assert.That(_root, Is.Not.Null);
+        Assert.That(JsonCore.GetString(_root, "item.id"), Is.EqualTo("A"));
     }
 
-    [Fact]
+    [Test]
     public void JsonPath_ShouldNavigateCorrectly()
     {
         var node = JsonCore.JsonPath(_root, "$.item.precio.valor");
-        Assert.Equal("120", node!.ToString());
+        Assert.That(node!.ToString(), Is.EqualTo("120"));
     }
 
-    [Fact]
+    [Test]
     public void GetDouble_ShouldReturnNumericValue()
     {
         var val = JsonCore.GetDouble(_root, "item.precio.valor");
-        Assert.Equal(120, val);
+        Assert.That(val, Is.EqualTo(120));
     }
 
-    [Fact]
+    [Test]
     public void EvalCondition_ShouldEvaluateNumericExpression()
     {
         var ok = JsonCore.EvalCondition(_root["item"]!, "precio.valor > 100");
-        Assert.True(ok);
+        Assert.That(ok, Is.True);
     }
 }
