@@ -65,8 +65,9 @@ public class JsonGraphTests
     public void Build_ShouldReplacePreviousGraphState()
     {
         var root = JsonCore.Parse("""{ "items": [{ "id": "X", "dependencias": [] }] }""")!;
-        _graph.Build(root, "$.items", "id", "dependencias");
-        Assert.That(_graph.Nodes.Keys, Is.EquivalentTo(new[] { "X" }));
+        var graph = new JsonGraph();
+        graph.Build(root, "$.items", "id", "dependencias");
+        Assert.That(graph.Nodes.Keys, Is.EquivalentTo(new[] { "X" }));
     }
 
     [Test]
