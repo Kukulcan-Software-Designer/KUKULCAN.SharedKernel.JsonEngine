@@ -26,7 +26,7 @@ jobs:
       - name: Create coverage settings
         shell: bash
         run: |
-          cat > /tmp/auth-coverage.runsettings <<'EOF'
+          cat > /tmp/jsonengine-coverage.runsettings <<'EOF'
           <?xml version="1.0" encoding="utf-8"?>
           <RunSettings>
             <DataCollectionRunSettings>
@@ -54,12 +54,12 @@ jobs:
       - name: Run unit tests with coverage
         run: >-
           dotnet test Tests/KUKULCAN.SharedKernel.JsonEngine.UnitTests/KUKULCAN.SharedKernel.JsonEngine.UnitTests.csproj
-          --no-build --configuration Release --settings /tmp/auth-coverage.runsettings
+          --no-build --configuration Release --settings /tmp/jsonengine-coverage.runsettings
           --logger "console;verbosity=normal" --collect:"XPlat Code Coverage"
       - name: Run JsonEngine integration tests with coverage
         run: >-
           dotnet test Tests/KUKULCAN.SharedKernel.JsonEngine.Integration/KUKULCAN.SharedKernel.JsonEngine.Integration.csproj
-          --no-build --configuration Release --settings /tmp/auth-coverage.runsettings
+          --no-build --configuration Release --settings /tmp/jsonengine-coverage.runsettings
           --logger "console;verbosity=normal" --collect:"XPlat Code Coverage"
       - name: Upload unit coverage
         uses: actions/upload-artifact@v4
